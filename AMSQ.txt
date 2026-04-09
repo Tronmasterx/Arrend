@@ -1,0 +1,95 @@
+CREATE TABLE TB_BG_Cat_Categoria (
+    Id_Categoria CHAR(3) NOT NULL,
+    Descripcion VARCHAR(25),
+    Num_Personas CHAR(2),
+    Num_Equipaje CHAR(2),
+    Num_Equipaje_Chico CHAR(2),
+    PRIMARY KEY (Id_Categoria)
+);
+
+CREATE TABLE TB_BG_Cat_Ciudad (
+    Id_Ciudad CHAR(3) NOT NULL,
+    Nombre VARCHAR(25),
+    PRIMARY KEY (Id_Ciudad)
+);
+
+CREATE TABLE TB_BG_Cat_Pais (
+    Id_Codigo CHAR(3) NOT NULL,
+    Pais VARCHAR(25),
+    PRIMARY KEY (Id_Codigo)
+);
+
+CREATE TABLE TB_BG_Cat_Sucursal (
+    Id_Ciudad CHAR(3) NOT NULL,
+    Id_Sucursal CHAR(3) NOT NULL,
+    Nombre VARCHAR(50),
+    Direccion VARCHAR(140),
+    CP CHAR(5),
+    Telefono VARCHAR(12),
+    Horario_Apertura CHAR(5),
+    Horario_Cierre CHAR(5),
+    PRIMARY KEY (Id_Ciudad, Id_Sucursal)
+);
+
+CREATE TABLE TB_BG_Cat_Tarifa (
+    Id_Ciudad CHAR(3) NOT NULL,
+    Id_Categoria CHAR(3) NOT NULL,
+    Costo_Dia DECIMAL(8,2),
+    PRIMARY KEY (Id_Ciudad, Id_Categoria)
+);
+
+CREATE TABLE TB_BG_Contrato (
+    Id_Contrato SMALLINT NOT NULL,
+    Id_Fecha_Registro DATETIME NOT NULL,
+    Id_Ciudad CHAR(3) NOT NULL,
+    Id_Sucursal CHAR(3) NOT NULL,
+    Id_Placas CHAR(6),
+    Fecha_Inicio DATETIME,
+    Fecha_Fin DATETIME,
+    Hora_Inicio CHAR(5),
+    Hora_Fin CHAR(5),
+    Costo_Dia DECIMAL(8,2),
+    Cond_Nombre VARCHAR(30),
+    Cond_Paterno VARCHAR(25),
+    Cond_Materno VARCHAR(25),
+    Cond_Edad TINYINT,
+    Forma_Pago VARCHAR(15),
+    Tarjeta VARCHAR(25),
+    Num_Tarjeta CHAR(16),
+    Venc_Mes CHAR(2),
+    Venc_Anio CHAR(4),
+    Codigo_Seg CHAR(4),
+    Titular_Tarjeta VARCHAR(50),
+    Estatus VARCHAR(9),
+    PRIMARY KEY (Id_Contrato, Id_Fecha_Registro)
+);
+
+CREATE TABLE TB_BG_Factura (
+    Id_Contrato SMALLINT NOT NULL,
+    Id_Fecha_Registro DATETIME NOT NULL,
+    No_Factura SMALLINT,
+    Tipo_Contribuyente CHAR(7),
+    Nombre VARCHAR(50),
+    Calle VARCHAR(35),
+    Colonia VARCHAR(35),
+    CP CHAR(5),
+    Municipio_Delega VARCHAR(35),
+    RFC CHAR(13),
+    Correo VARCHAR(30),
+    Telefono VARCHAR(7),
+    Id_Codigo CHAR(4),
+    Area VARCHAR(6),
+    Tel_Numero VARCHAR(16),
+    PRIMARY KEY (Id_Contrato, Id_Fecha_Registro)
+);
+
+CREATE TABLE TB_BG_Flotilla (
+    Id_Ciudad CHAR(3) NOT NULL,
+    Id_Sucursal CHAR(3) NOT NULL,
+    Id_Placas CHAR(6) NOT NULL,
+    Id_Categoria CHAR(3) NOT NULL,
+    Modelo VARCHAR(25),
+    Transmision CHAR(1),
+    Aire_Acondicionado CHAR(1),
+    PRIMARY KEY (Id_Ciudad, Id_Sucursal, Id_Placas)
+);
